@@ -41,7 +41,6 @@ INSERT INTO CharacterInformation VALUES
 	("Yoda", "Unknown", 1, "Green Lightsaber", "Jedi", "Unknown", TRUE, "Star Wars: Episode III - Revenge of the Sith", TRUE),
 	("Yoda", "Unknown", 1, "Cane", "Jedi", "Unknown", TRUE, "Star Wars: Episode V - The Empire Strikes Back", TRUE),
 	("Yoda", "Unknown", 0, "None", "Jedi", "Unknown", TRUE, "Star Wars: Episode VI - Return of the Jedi", TRUE),
-	("Yoda", "Unknown", 1, "Green Lightsaber", "Jedi", "Unknown", TRUE, "Star Wars: Episode V - The Empire Strikes Back", TRUE),
 	("Yoda", "Unknown", 0, "None", "Jedi", "Unknown", TRUE, "Star Wars: Episode VIII - The Last Jedi", TRUE),
 	("Yoda", "Unknown", 1, "Green Lightsaber", "Jedi", "Unknown", TRUE, "Star Wars: The Clone Wars S1", TRUE),
 	("Yoda", "Unknown", 1, "Green Lightsaber", "Jedi", "Unknown", TRUE, "Star Wars: The Clone Wars S2", TRUE),
@@ -54,14 +53,14 @@ INSERT INTO CharacterInformation VALUES
 	("Din Djarin", "Human", 6, "Amban Sniper Rifle", "Bounty Hunter", "Aq Vetina", FALSE, "The Mandalorian S1", TRUE),
 	("Din Djarin", "Human", 6, "Beskar Spear", "Bounty Hunter", "Aq Vetina", FALSE, "The Mandalorian S2", TRUE),
 	("Din Djarin", "Human", 6, "Blastech IB-94 Blaster Pistol", "Bounty Hunter", "Aq Vetina", FALSE, "The Mandalorian S3", TRUE),
-	("Din Djarin", "Human", 6, "Darksaber", "Bounty Hunter", "Aq Vetina", FALSE, "The Book of Boba Fett S1", TRUE),
+	("Din Djarin", "Human", 6, "Darksaber", "Bounty Hunter", "Aq Vetina", FALSE, "The Book of Boba Fett S1", TRUE)
 ;
 
 -- INSERT data apperence
 INSERT INTO Appearance VALUES
 	("Star Wars: Episode I - The Phantom Menace", "George Lucas", "Lucasfilm Ltd.", 1999),
 	("Star Wars: Episode II - Attack of the Clones", "George Lucas", "Lucasfilm Ltd.", 2002),
-	("Star Wars: Episode III - Revenge of the Sith", "George Lucas", "Lucasfilm Ltd.", 2005)
+	("Star Wars: Episode III - Revenge of the Sith", "George Lucas", "Lucasfilm Ltd.", 2005),
 	("Star Wars: Episode IV - A New Hope", "George Lucas", "Lucasfilm Ltd.", 1977),
 	("Star Wars: Episode V - The Empire Strikes Back", "George Lucas", "Lucasfilm Ltd.", 1980),
 	("Star Wars: Episode VI - Return of the Jedi", "George Lucas", "Lucasfilm Ltd.", 1983),
@@ -106,5 +105,3 @@ CREATE VIEW appears_in AS
 SELECT characterinformation.Name, Appearance.Title,  characterInformation.MediaTitle 
 FROM characterinformation
 JOIN appearance ON characterinformation.MediaTitle = appearance.Title
-
-
