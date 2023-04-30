@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS StarWarsCharacters;
 CREATE DATABASE IF NOT EXISTS StarWarsCharacters;
 USE StarWarsCharacters;
 
--- CharacterInformation(Species, WeaponQuantity, Weapon, Occupation, OriginPlanet, ForceSensitive, Name, AdminApproval, MediaTitle)
+-- CharacterInformation(Name, Species, WeaponQuantity, Weapon, Occupation, OriginPlanet, ForceSensitive, MediaTitle, AdminApproval)
 CREATE TABLE IF NOT EXISTS CharacterInformation (
 	Name VARCHAR(30),
 	Species VARCHAR(30),
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Appearance (
 );
 
 -- INSERT data character info
-INSERT INTO characterinformation VALUES
+INSERT INTO CharacterInformation VALUES
 	("Ahsoka Tano", "Togruta", 2, "White Lightsaber", "Rebel", "Kiros", TRUE, "Star Wars: Rebels", TRUE),
 	("Ahsoka Tano", "Togruta", 2, "White Lightsaber", "Grey Jedi", "Kiros", TRUE, "The Mandalorian", TRUE),
 	("Ahsoka Tano", "Togruta", 1, "Green Lightsaber", "Jedi", "Kiros", TRUE, "Star Wars: The Clone Wars S1", TRUE),
@@ -39,7 +39,9 @@ INSERT INTO characterinformation VALUES
 ;
 
 -- INSERT data apperence
-INSERT INTO appearance VALUES
+INSERT INTO Appearance VALUES
+	("Star Wars: Episode IV - A New Hope", "George Lucas", "Lucasfilm", 1977),
+	("Star Wars: Episode I - The Phantom Menace", "George Lucas", "Lucasfilm", 1999),
 	("Star Wars: Rebels", "Dave Filoni", "Lucasfilm Animation", 2014),
 	("The Mandalorian", "Jon Faveau", "Walt Disney Studios", 2019),
 	("Star Wars: The Clone Wars S1", "Dave Filoni", "Lucasfilm Animation", 2008),
@@ -51,6 +53,8 @@ INSERT INTO appearance VALUES
 	("Star Wars: The Clone Wars S7", "Dave Filoni", "Lucasfilm Animation", 2019)
 ;
 
+
+
 CREATE VIEW fan_view AS
 SELECT *
 FROM characterinformation  
@@ -59,7 +63,11 @@ WHERE AdminApproval = TRUE;
 CREATE VIEW approval_needed_view AS
 SELECT *
 FROM characterinformation   
-WHERE AdminApproval = default (AdminApproval);
+WHERE AdminApproval = DEFAULT (AdminApproval);
 
-CREATE VIEW 
+CREATE VIEW appears_in AS	
+SELECT characterinformation.Name, Appearance.Title,  characterInformation.MediaTitle 
+FROM characterinformation
+JOIN appearance ON characterinformation.MediaTitle = appearance.Title
+
 
