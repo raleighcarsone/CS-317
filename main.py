@@ -2,11 +2,8 @@ import mysql.connector
 
 # Creating connection object
 
-# user = input("Input user: ")
-# password = input("Input password: ")
-
-user = 'root'
-password = 'Mog'
+user = input("Input user: ")
+password = input("Input password: ")
 
 mydb = mysql.connector.connect(host='localhost', user=user, password=password, database='starwarscharacters')
 cursor = mydb.cursor()
@@ -36,16 +33,99 @@ while not exitCode:
         input()
 
     elif entry == "FILTER DATABASE" or entry == "3":
-        columnInput = input("Enter your desired filter\n"
-                            "Name, Species, WeaponQuantity, Weapon, Occupation, OriginPlanet, ForceSensitive, MediaTitle\n")
-        query = "SELECT UNIQUE %s FROM characterinformation"
-        cursor.execute(query, (columnInput,))
-        for results in cursor:
-            print(results)
-        filterInput = input("Chose from the above options\n")
-        cursor.execute('SELECT * FROM characterinformation WHERE %s = %s', (columnInput, filterInput))
-        for resultsNew in cursor:
-            print(resultsNew)
+        print("Enter your desired filter\n"
+              "Name, Species, WeaponQuantity, Weapon, Occupation, OriginPlanet, ForceSensitive, MediaTitle")
+        field = input()
+
+        if field == "Name" or field == "name":
+            query = "SELECT UNIQUE name FROM characterinformation"
+            cursor.execute(query)
+            for thing in cursor:
+                print(thing)
+            filterInput = input("Chose from the above options\n")
+            query = "SELECT * FROM characterinformation WHERE name = %s"
+            cursor.execute(query,  (filterInput,))
+            for resultsNew in cursor:
+                print(resultsNew)
+
+        elif field == "MediaTitle":
+            query = "SELECT UNIQUE MediaTitle FROM characterinformation"
+            cursor.execute(query)
+            for thing in cursor:
+                print(thing)
+            filterInput = input("Chose from the above options\n")
+            query = "SELECT * FROM characterinformation WHERE MediaTitle = %s"
+            cursor.execute(query, (filterInput,))
+            for resultsNew in cursor:
+                print(resultsNew)
+
+        elif field == "Species" or field == "species":
+            query = "SELECT UNIQUE species FROM characterinformation"
+            cursor.execute(query)
+            for thing in cursor:
+                print(thing)
+            filterInput = input("Chose from the above options\n")
+            query = "SELECT * FROM characterinformation WHERE species = %s"
+            cursor.execute(query,  (filterInput,))
+            for resultsNew in cursor:
+                print(resultsNew)
+
+        elif field == "WeaponQuantity":
+            query = "SELECT UNIQUE weaponQuantity FROM characterinformation"
+            cursor.execute(query)
+            for thing in cursor:
+                print(thing)
+            filterInput = input("Chose from the above options\n")
+            query = "SELECT * FROM characterinformation WHERE weaponQuantity = %s"
+            cursor.execute(query,  (filterInput,))
+            for resultsNew in cursor:
+                print(resultsNew)
+
+        elif field == "Weapon" or field == "weapon":
+            query = "SELECT UNIQUE weapon FROM characterinformation"
+            cursor.execute(query)
+            for thing in cursor:
+                print(thing)
+            filterInput = input("Chose from the above options\n")
+            query = "SELECT * FROM characterinformation WHERE weapon = %s"
+            cursor.execute(query,  (filterInput,))
+            for resultsNew in cursor:
+                print(resultsNew)
+
+        elif field == "Occupation" or field == "occupation":
+            query = "SELECT UNIQUE name FROM characterinformation"
+            cursor.execute(query)
+            for thing in cursor:
+                print(thing)
+            filterInput = input("Chose from the above options\n")
+            query = "SELECT * FROM characterinformation WHERE occupation = %s"
+            cursor.execute(query,  (filterInput,))
+            for resultsNew in cursor:
+                print(resultsNew)
+
+        elif field == "Planet" or field == "planet":
+            query = "SELECT UNIQUE name FROM characterinformation"
+            cursor.execute(query)
+            for thing in cursor:
+                print(thing)
+            filterInput = input("Chose from the above options\n")
+            query = "SELECT * FROM characterinformation WHERE planet = %s"
+            cursor.execute(query,  (filterInput,))
+            for resultsNew in cursor:
+                print(resultsNew)
+
+        elif field == "forceSensitive":
+            print("(True, False)")
+            filterInput = input("Chose from the above options\n")
+            if filterInput == "True":
+                query = "SELECT * FROM characterinformation WHERE forceSensitive = 1"
+                cursor.execute(query)
+            elif filterInput == "False":
+                query = "SELECT * FROM characterinformation WHERE forceSensitive = 0"
+                cursor.execute(query)
+            for resultsNew in cursor:
+                print(resultsNew)
+
         input()
 
     elif entry == "VIEW CHARACTERS" or entry == "4":
