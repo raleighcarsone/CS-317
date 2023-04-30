@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS CharacterInformation (
 	PRIMARY KEY (Name, MediaTitle)
 );
 
--- Apperance(Title, Director, Studio, ReleaseYear)
+-- Appearance(Title, Director, Studio, ReleaseYear)
 CREATE TABLE IF NOT EXISTS Appearance (
 	Title VARCHAR(50),
 	Director VARCHAR(30),
