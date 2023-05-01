@@ -2,8 +2,11 @@ import mysql.connector
 
 # Creating connection object
 
-user = input("Input user: ")
-password = input("Input password: ")
+# user = input("Input user: ")
+# password = input("Input password: ")
+
+user = 'root'
+password = 'Mog'
 
 mydb = mysql.connector.connect(host='localhost', user=user, password=password, database='starwarscharacters')
 cursor = mydb.cursor()
@@ -30,7 +33,19 @@ while not exitCode:
         input()
 
     elif entry == "UPDATE DATABASE" or entry == "2":
-        input()
+        print("Enter the name of the character you would like to update: ")
+        name = input()
+        print("Enter the media title the character appears in: ")
+        title = input()
+        print("Enter the category you'd like to change: ")
+        field = input()
+        print("What would you like to change the " + field + " to: ")
+        change = input()
+
+        query = "UPDATE characterinformation SET "+field+"= %s WHERE (name = %s AND mediaTitle = %s)"
+        cursor.execute(query, (change, name, title))
+        query = "UPDATE characterinformation SET adminApproval = 0 WHERE (name = %s AND mediaTitle = %s)"
+        cursor.execute(query, (name, title))
 
     elif entry == "FILTER DATABASE" or entry == "3":
         print("Enter your desired filter\n"
@@ -137,6 +152,27 @@ while not exitCode:
     elif entry == "EXIT" or entry == "5":
         exitCode = True
 
+    elif entry == "ADMIN APPROVAL":
+        toDelete = []
+        toApprove = []
+        cursor.execute("SELECT * FROM characterinformation WHERE AdminApproval = 0")
+        for changes in cursor:
+            print(changes)
+            approved = input("would you like to approve this entry? [Y/N]\n")
+            if approved == "Y":
+                toApprove.append(changes)
+            elif approved == "N":
+                toDelete.append(changes)
+
+        cursor.execute("SELECT * FROM characterinformation")
+        check = cursor.fetchall()
+
+        #for table in check:
+         #   for app in toApprove:
+          #      if app == table:
+           #         cursor.execute("")
+            #for delete in toDelete:
+             #   if delete == table:
     else:
         print("Please enter a valid input\n")
 
