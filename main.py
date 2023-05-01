@@ -155,15 +155,22 @@ while not exitCode:
     elif entry == "ADMIN APPROVAL":
         toDelete = []
         toApprove = []
-        cursor.execute("SELECT * FROM characterinformation WHERE AdminApproval = 0")
+        cursor.execute("SELECT * FROM approval_needed_view")
         for changes in cursor:
             print(changes)
             approved = input("would you like to approve this entry? [Y/N]\n")
             if approved == "Y":
                 toApprove.append(changes)
+                name = input("if you wish to approve enter character name:")
+                media = input("if you wish to approve enter the appearance:")
+                query = "UPDATE characterinformation SET adminApproval = 1 WHERE (name = %s AND mediaTitle = %s)"
+                cursor.execute(query, (name, media))
             elif approved == "N":
                 toDelete.append(changes)
-
+                name = input("if you wish to delete enter character name:")
+                media = input("if you wish to delete enter the appearance:")
+                query = "delete from characterinformation  WHERE (name = %s AND mediaTitle = %s)"
+                cursor.execute(query, (name, media))
         cursor.execute("SELECT * FROM characterinformation")
         check = cursor.fetchall()
 
@@ -178,3 +185,4 @@ while not exitCode:
 
 mydb.close()
 print("Thank you!")
+
